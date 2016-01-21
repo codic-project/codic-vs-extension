@@ -1,2 +1,2 @@
-# codic-vs-extension
-Codic Extension for Visual Studio
+# Codic Extension for Visual Studio
+
