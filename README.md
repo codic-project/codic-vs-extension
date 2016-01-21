@@ -1,5 +1,5 @@
 # Codic Extension for Visual Studio
-Visual Studio 向けの拡張です。
+[codic](https://codic.jp)のネーミング生成を Visual Studio から使えるようにする拡張です。
 <!--
 ![codic plugin](https://raw.githubusercontent.com/codic-project/codic-intellij-plugin/master/img/screenshot1.png)
 -->
