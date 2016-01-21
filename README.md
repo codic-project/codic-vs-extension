@@ -1,7 +1,10 @@
 # Codic Extension for Visual Studio
-Visual Studio向けの拡張です。
-
+Visual Studio 向けの拡張です。
+<!--
 ![codic plugin](https://raw.githubusercontent.com/codic-project/codic-intellij-plugin/master/img/screenshot1.png)
+-->
+### Compatiblity
+Visual Studio 2015+
 
 ### Install
 
