@@ -56,7 +56,6 @@
   <ItemGroup>
     <Compile Include="Model\ApiException.cs" />
     <Compile Include="Model\CodicApi.cs" />
-    <Compile Include="Model\DictionaryItem.cs" />
     <Compile Include="Model\Project.cs" />
     <Compile Include="Model\Translation.cs" />
     <Compile Include="Model\TranslationResult.cs" />

@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="ac2b5448-abab-443a-9b8f-1db1023a9b13" Version="1.0" Language="ja-JP" Publisher="Codic Project Team" />
+    <Identity Id="7123CD01-7097-408E-970E-9B723B4D6A8B" Version="1.0" Language="ja-JP" Publisher="Codic Project Team" />
     <DisplayName>Codic Extension</DisplayName>
-    <Description xml:space="preserve">Codic Extension for Visual StudioCodic</Description>
+    <Description xml:space="preserve">Codic Extension for Visual Studio</Description>
     <MoreInfo>https://github.com/codic-project/codic-vs-extension</MoreInfo>
     <GettingStartedGuide>https://github.com/codic-project/codic-vs-extension</GettingStartedGuide>
     <ReleaseNotes>https://github.com/codic-project/codic-vs-extension</ReleaseNotes>
-    <Icon>CodicExtensionPackage.png</Icon>
-    <PreviewImage>Screenshot.png</PreviewImage>
+    <Icon>Resources\CodicExtensionPackage.png</Icon>
+    <PreviewImage>Resources\Screenshot.png</PreviewImage>
     <Tags>translator, translate, localize, naming, english</Tags>
   </Metadata>
   <Installation>
