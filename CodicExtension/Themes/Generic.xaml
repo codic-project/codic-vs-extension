@@ -1,0 +1,247 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shell="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.10.0"
+                    xmlns:platformUi="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.10.0">
+
+    <!-- Window style -->
+
+    <!--
+    <Style TargetType="{x:Type presentation:ExDialogWindow}">
+        <Setter Property="WindowStyle" Value="None" />
+        <Setter Property="ResizeMode" Value="NoResize" />
+        <Setter Property="AllowsTransparency" Value="True"/>
+        <Setter Property="Background" Value="{DynamicResource {x:Static shell:VsBrushes.ToolWindowBackgroundKey}}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="{DynamicResource {x:Static shell:VsBrushes.ToolWindowBorderKey}}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type presentation:ExDialogWindow}">
+                    <Border BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}">
+
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="0" Color="DarkGray" Opacity="0.5" />
+                        </Border.Effect>
+
+                        <Grid>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Border x:Name="moveRectangle" >
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Path
+                                            Data="M57.234375,65.0406265258789L61.921875,65.0406265258789 61.921875,75.1187515258789 83.71875,75.1187515258789 83.71875,79.8531265258789 61.921875,79.8531265258789 61.921875,90.5875015258789 88.125,90.5875015258789 88.125,95.2750015258789 61.921875,95.2750015258789 61.921875,114.962501525879 57.234375,114.962501525879 57.234375,95.2750015258789 30.703125,95.2750015258789 30.703125,90.5875015258789 57.234375,90.5875015258789 57.234375,79.8531265258789 35.0625,79.8531265258789 35.0625,75.1187515258789 57.234375,75.1187515258789 57.234375,65.0406265258789z M6.328125,59.8843765258789L23.0625,59.8843765258789 23.0625,104.415626525879 27.5859355926514,101.825782775879 32.53125,98.4625015258789 34.546875,103.056251525879 27.1054668426514,107.650001525879 19.78125,111.587501525879 17.671875,107.884376525879 18.140625,105.259376525879 18.140625,64.4781265258789 6.328125,64.4781265258789 6.328125,59.8843765258789z M45.046875,38.0875015258789L48.4013633728027,42.4732437133789 51.9492149353027,46.3492202758789 55.6904258728027,49.7154312133789 59.625,52.5718765258789 64.0048828125,49.5923843383789 68.37890625,46.1851577758789 72.7470703125,42.3501968383789 77.109375,38.0875015258789 45.046875,38.0875015258789z M32.625,33.3531265258789L83.8125,33.3531265258789 83.8125,38.0875015258789 79.67578125,42.5289077758789 75.046875,46.9000015258789 69.92578125,51.2007827758789 64.3125,55.4312515258789 69.7705078125,58.3668022155762 75.87890625,61.2203178405762 82.6376953125,63.9918022155762 90.046875,66.6812515258789 87.5625,71.0875015258789 79.341796875,67.9878921508789 71.9765625,64.8296890258789 65.466796875,61.6128921508789 59.8125,58.3375015258789 54.3662071228027,61.3492202758789 47.7304649353027,64.4312515258789 39.9052696228027,67.5835952758789 30.890625,70.8062515258789 28.5,66.4937515258789 36.392578125,63.9390678405762 43.4765625,61.2437553405762 49.751953125,58.4078178405762 55.21875,55.4312515258789 50.6455078125,51.7984390258789 46.39453125,47.6968765258789 42.4658203125,43.1265640258789 38.859375,38.0875015258789 32.625,38.0875015258789 32.625,33.3531265258789z M14.765625,31.0562515258789L18.6650390625,34.9761734008789 22.16015625,38.8609390258789 25.2509765625,42.7105484008789 27.9375,46.5250015258789 24,49.5718765258789 21.6708984375,46.0708999633789 18.71484375,42.3179702758789 15.1318359375,38.3130874633789 10.9218759536743,34.0562515258789 14.765625,31.0562515258789z"
+                                            Stretch="Uniform" Margin="5,3,0,0" RenderTransformOrigin="0.5,0.5"
+                                            Height="11"
+                                            Fill="{DynamicResource {x:Static shell:VsBrushes.ToolWindowTextKey}}" />
+                                        <TextBlock Grid.Column="1"
+                                                   Text="{TemplateBinding Title}"
+                                                   Margin="5,-1,0,0"
+                                                   VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis" />
+                                        <Button Grid.Column="2" Name="closeButton" VerticalAlignment="Center"
+                                                ToolTip="Close" Margin="5,5,5,0">
+                                            <Path
+                                                Data="F1M54.0573,47.8776L38.1771,31.9974 54.0547,16.1198C55.7604,14.4141 55.7604,11.6511 54.0573,9.94531 52.3516,8.23962 49.5859,8.23962 47.8802,9.94531L32.0026,25.8229 16.1224,9.94531C14.4167,8.23962 11.6511,8.23962 9.94794,9.94531 8.24219,11.6511 8.24219,14.4141 9.94794,16.1198L25.8255,32 9.94794,47.8776C8.24219,49.5834 8.24219,52.3477 9.94794,54.0534 11.6511,55.7572 14.4167,55.7585 16.1224,54.0534L32.0026,38.1745 47.8802,54.0534C49.5859,55.7585 52.3516,55.7572 54.0573,54.0534 55.7604,52.3477 55.763,49.5834 54.0573,47.8776z"
+                                                Stretch="Uniform" Width="10" Height="10" />
+                                        </Button>
+                                    </Grid>
+                                </Border>
+                                <Grid Grid.Column="0" Background="{TemplateBinding Background}"
+                                      Grid.Row="1" Grid.ColumnSpan="2" Margin="5,5,5,5">
+                                    <AdornerDecorator>
+                                        <ContentPresenter />
+                                    </AdornerDecorator>
+                                </Grid>
+                            </Grid>
+
+                            <Grid x:Name="resizeGrid">
+                                <Rectangle
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    VerticalAlignment="Top"
+                                    Height="5"
+                                    x:Name="top"
+                                    Margin="5,0,5,0" />
+                                <Rectangle
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    x:Name="bottom"
+                                    Height="5"
+                                    VerticalAlignment="Bottom"
+                                    Margin="5,0,5,0" />
+                                <Rectangle
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    HorizontalAlignment="Left"
+                                    Margin="0,5,0,5"
+                                    Width="5"
+                                    x:Name="left" />
+                                <Rectangle
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    Margin="0,5,0,5"
+                                    Width="5"
+                                    HorizontalAlignment="Right"
+                                    x:Name="right" />
+                                <Rectangle
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Bottom"
+                                    Width="5"
+                                    Height="5"
+                                    x:Name="bottomLeft" />
+                                <Rectangle
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    VerticalAlignment="Bottom"
+                                    Height="5"
+                                    Width="5"
+                                    HorizontalAlignment="Right"
+                                    x:Name="bottomRight" />
+                                <Rectangle
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    HorizontalAlignment="Right"
+                                    Width="5"
+                                    Height="5"
+                                    VerticalAlignment="Top"
+                                    x:Name="topRight" />
+                                <Rectangle
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    HorizontalAlignment="Left"
+                                    Width="6"
+                                    VerticalAlignment="Top"
+                                    Height="5"
+                                    x:Name="topLeft" />
+                            </Grid>
+
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    -->
+
+    <!--
+    <Style x:Key="DoubleBounceProgressRingStyle" TargetType="presentation:ModernProgressRing">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground"
+                Value="{DynamicResource {x:Static shell:VsBrushes.TitleBarActiveGradientBeginKey}}" />
+        <Setter Property="IsHitTestVisible" Value="False" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="MinHeight" Value="16" />
+        <Setter Property="MinWidth" Value="16" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="presentation:ModernProgressRing">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="SizeStates">
+                                <VisualState x:Name="Large" />
+                                <VisualState x:Name="Small" />
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="ActiveStates">
+                                <VisualState x:Name="Inactive" />
+                                <VisualState x:Name="Active">
+                                    <Storyboard RepeatBehavior="Forever">
+                                        <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="Ring"
+                                                                       Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames
+                                            Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                            Storyboard.TargetName="ProgressElement1">
+                                            <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                                            <SplineDoubleKeyFrame KeyTime="0:0:1" Value="1" KeySpline="0.42,0 0.58,1" />
+                                            <SplineDoubleKeyFrame KeyTime="0:0:2" Value="0" KeySpline="0.42,0 0.58,1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames
+                                            Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                            Storyboard.TargetName="ProgressElement1">
+                                            <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                                            <SplineDoubleKeyFrame KeyTime="0:0:1" Value="1" KeySpline="0.42,0 0.58,1" />
+                                            <SplineDoubleKeyFrame KeyTime="0:0:2" Value="0" KeySpline="0.42,0 0.58,1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames
+                                            Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                            Storyboard.TargetName="ProgressElement2">
+                                            <EasingDoubleKeyFrame KeyTime="0" Value="1" />
+                                            <SplineDoubleKeyFrame KeyTime="0:0:1" Value="0" KeySpline="0.42,0 0.58,1" />
+                                            <SplineDoubleKeyFrame KeyTime="0:0:2" Value="1" KeySpline="0.42,0 0.58,1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames
+                                            Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                            Storyboard.TargetName="ProgressElement2">
+                                            <EasingDoubleKeyFrame KeyTime="0" Value="1" />
+                                            <SplineDoubleKeyFrame KeyTime="0:0:1" Value="0" KeySpline="0.42,0 0.58,1" />
+                                            <SplineDoubleKeyFrame KeyTime="0:0:2" Value="1" KeySpline="0.42,0 0.58,1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid>
+                            <Grid x:Name="Ring"
+                                  Margin="{TemplateBinding Padding}"
+                                  Visibility="Collapsed"
+                                  FlowDirection="LeftToRight">
+                                <Ellipse x:Name="ProgressElement1" Fill="{TemplateBinding Foreground}" Opacity="0.6"
+                                         RenderTransformOrigin="0.5,0.5">
+                                    <Ellipse.RenderTransform>
+                                        <ScaleTransform />
+                                    </Ellipse.RenderTransform>
+                                </Ellipse>
+                                <Ellipse x:Name="ProgressElement2" Fill="{TemplateBinding Foreground}" Opacity="0.6"
+                                         RenderTransformOrigin="0.5,0.5">
+                                    <Ellipse.RenderTransform>
+                                        <ScaleTransform />
+                                    </Ellipse.RenderTransform>
+                                </Ellipse>
+                            </Grid>
+                            <Grid x:Name="InactiveContext"
+                                  Margin="{TemplateBinding Padding}"
+                                  Visibility="Collapsed"
+                                  FlowDirection="LeftToRight">
+                                <Path
+                                    Data="M57.234375,65.0406265258789L61.921875,65.0406265258789 61.921875,75.1187515258789 83.71875,75.1187515258789 83.71875,79.8531265258789 61.921875,79.8531265258789 61.921875,90.5875015258789 88.125,90.5875015258789 88.125,95.2750015258789 61.921875,95.2750015258789 61.921875,114.962501525879 57.234375,114.962501525879 57.234375,95.2750015258789 30.703125,95.2750015258789 30.703125,90.5875015258789 57.234375,90.5875015258789 57.234375,79.8531265258789 35.0625,79.8531265258789 35.0625,75.1187515258789 57.234375,75.1187515258789 57.234375,65.0406265258789z M6.328125,59.8843765258789L23.0625,59.8843765258789 23.0625,104.415626525879 27.5859355926514,101.825782775879 32.53125,98.4625015258789 34.546875,103.056251525879 27.1054668426514,107.650001525879 19.78125,111.587501525879 17.671875,107.884376525879 18.140625,105.259376525879 18.140625,64.4781265258789 6.328125,64.4781265258789 6.328125,59.8843765258789z M45.046875,38.0875015258789L48.4013633728027,42.4732437133789 51.9492149353027,46.3492202758789 55.6904258728027,49.7154312133789 59.625,52.5718765258789 64.0048828125,49.5923843383789 68.37890625,46.1851577758789 72.7470703125,42.3501968383789 77.109375,38.0875015258789 45.046875,38.0875015258789z M32.625,33.3531265258789L83.8125,33.3531265258789 83.8125,38.0875015258789 79.67578125,42.5289077758789 75.046875,46.9000015258789 69.92578125,51.2007827758789 64.3125,55.4312515258789 69.7705078125,58.3668022155762 75.87890625,61.2203178405762 82.6376953125,63.9918022155762 90.046875,66.6812515258789 87.5625,71.0875015258789 79.341796875,67.9878921508789 71.9765625,64.8296890258789 65.466796875,61.6128921508789 59.8125,58.3375015258789 54.3662071228027,61.3492202758789 47.7304649353027,64.4312515258789 39.9052696228027,67.5835952758789 30.890625,70.8062515258789 28.5,66.4937515258789 36.392578125,63.9390678405762 43.4765625,61.2437553405762 49.751953125,58.4078178405762 55.21875,55.4312515258789 50.6455078125,51.7984390258789 46.39453125,47.6968765258789 42.4658203125,43.1265640258789 38.859375,38.0875015258789 32.625,38.0875015258789 32.625,33.3531265258789z M14.765625,31.0562515258789L18.6650390625,34.9761734008789 22.16015625,38.8609390258789 25.2509765625,42.7105484008789 27.9375,46.5250015258789 24,49.5718765258789 21.6708984375,46.0708999633789 18.71484375,42.3179702758789 15.1318359375,38.3130874633789 10.9218759536743,34.0562515258789 14.765625,31.0562515258789z"
+                                    Stretch="Uniform" Margin="2" RenderTransformOrigin="0.5,0.5"
+                                    Fill="{DynamicResource {x:Static shell:VsBrushes.ToolWindowTextKey}}" />
+                            </Grid>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsActive" Value="True">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="InactiveContext" />
+                        </Trigger>
+                        <Trigger Property="IsActive" Value="False">
+                            <Setter Property="Visibility" Value="Visible" TargetName="InactiveContext" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="presentation:ModernProgressRing" BasedOn="{StaticResource DoubleBounceProgressRingStyle}"/>
+    -->
+
+</ResourceDictionary>
