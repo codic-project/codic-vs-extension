@@ -22,13 +22,9 @@ namespace CodicExtension.Model
         {
             var data = Utils.BuildQuerystring(new Dictionary<string, string>());
 
-            // try
-            //{
             JArray json = await PostJsonArray(accessToken,
                 "https://api.codic.jp/v1/user_projects.json", data);
-                            
-   
-
+            
             List<Project> projects = new List<Project>();
             foreach (JToken projectToken in json) {
                 var project = new Project();
@@ -55,21 +51,21 @@ namespace CodicExtension.Model
             });
 
             JArray json = await PostJsonArray(accessToken,
-    "https://api.codic.jp/v1/engine/translate.json", data);
+    "https://api.codic.jp/v1.1/engine/translate.json", data);
 
             TranslationResult result = new TranslationResult();
             List<Translation> translations = new List<Translation>();
             foreach (JToken translationToken in json)
             {
                 var translation = new Translation();
-                translation.TranslatedText = translationToken["translated_text"].ToString();
+                translation.TranslatedText = translationToken["translated_text_in_casing"].ToString();
                 List<Word> words = new List<Word>();
                 foreach (JToken wordToken in translationToken["words"]) {
                     Word word = new Word();
                     List<string> candidates = new List<string>();
                     foreach (JToken candidateToken in wordToken["candidates"])
                     {
-                        candidates.Add(candidateToken["text"].ToString());
+                        candidates.Add(candidateToken["text_in_casing"].ToString());
                     }
                     word.Candidates = candidates;
                     words.Add(word);
@@ -79,12 +75,6 @@ namespace CodicExtension.Model
             }
 
             result.Translations = translations;
-
-            //result.DestinationLanguage = destinationLang;
-            //result.RequestSourceLanguage = sourceLang;
-            //result.OriginalText = text;
-            //result.TranslationSource = Name;
-
             return result;
         }
 
@@ -115,8 +105,6 @@ namespace CodicExtension.Model
                 JObject json = JObject.Parse(responseText);
                 JToken error = json["errors"].Children().First();
                 throw new ApiException(int.Parse(error["code"].ToString()), error["message"].ToString());
-
-                    //return responseText;
             }
         }
     }

@@ -14,8 +14,12 @@ Visual Studio IDE向けのcodic拡張です。
 
 ![codic plugin](https://raw.githubusercontent.com/codic-project/codic-vs-extension/master/CodicExtension/Resources/Screenshot.png)
 
+ケース (Letter Case) は、最後に選択されたモノがファイルの拡張子ごとに記憶されます。時間があれば、パーサーにアクセスして変数宣言、関数宣言など文脈ごとに記憶させたいと思っています。
 
 ### Change log
+
+_1.0.1_
+- Use v1.1 API.
 
 _1.0.0_
 - First Release
