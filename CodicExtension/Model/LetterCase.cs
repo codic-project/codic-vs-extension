@@ -22,17 +22,16 @@ namespace CodicExtension.Model
             return ENTRIES;
         }
 
-        public static LetterCase ValueOf(string id)
+        public static LetterCase ValueOf(string id, LetterCase default_)
         {
             for (int i = 0; i < ENTRIES.Length; i++)
             {
-
-                if (id.Equals(ENTRIES[i].Id))
+                if (ENTRIES[i].Id.Equals(id))
                 {
                     return ENTRIES[i];
                 }
             }
-            return null;
+            return default_;
         }
 
         private LetterCase(string id, string name, string shortName)

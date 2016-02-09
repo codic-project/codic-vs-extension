@@ -60,17 +60,20 @@ namespace CodicExtension
             var oleMenuCommand = sender as OleMenuCommand;
             if (oleMenuCommand != null)
             {
+                oleMenuCommand.Enabled = true;
+                oleMenuCommand.Text = "Generate Naming";
                 var view = GetActiveTextView();
-                oleMenuCommand.Enabled = view != null && view.Selection != null && !view.Selection.IsEmpty;
-                if (oleMenuCommand.Enabled)
+                if (view != null)
                 {
-                    var span = view.Selection.SelectedSpans[0];
-                    var selectedText = span.GetText();
-                    oleMenuCommand.Text = string.Format("Generate Naming for '{0}'", selectedText.Truncate(26));
-                }
-                else
+                    if (view.Selection != null && !view.Selection.IsEmpty)
+                    {
+                        var span = view.Selection.SelectedSpans[0];
+                        var selectedText = span.GetText();
+                        oleMenuCommand.Text = string.Format("Generate Naming for '{0}'", selectedText.Truncate(26));
+                    }
+                } else
                 {
-                    oleMenuCommand.Text = "Generate Naming";
+                    oleMenuCommand.Enabled = false;
                 }
             }
         }
@@ -132,7 +135,8 @@ namespace CodicExtension
                     fileType = Path.GetExtension(textDoc.FilePath).ToLower();
                 }
 
-                LetterCase letterCase = LetterCase.ValueOf(props.LetterCaseConvention[fileType]);
+                LetterCase letterCase = LetterCase.ValueOf(props.LetterCaseConvention[fileType],
+                    LetterCase.Enumulate()[0]);
 
                 // Get selection in view.
                 SnapshotSpan span = view.Selection.SelectedSpans[0];
@@ -156,8 +160,11 @@ namespace CodicExtension
                 dialog.LetterCaseChanged += (sender2, args) => {
                     if (props.LetterCaseConvention.ContainsKey(fileType))
                         props.LetterCaseConvention.Remove(fileType);
-                    props.LetterCaseConvention.Add(fileType, args.Selection.Id);
-                    props.Save();
+                    if (args.Selection != null)
+                    {
+                        props.LetterCaseConvention.Add(fileType, args.Selection.Id);
+                        props.Save();
+                    }
                 };
                 dialog.ShowModeless(letterCase);
             }

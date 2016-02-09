@@ -18,6 +18,10 @@ Visual Studio IDE向けのcodic拡張です。
 
 ### Change log
 
+_1.0.2_
+- Fix bug #2 (NullReferenceException).
+- Remove extra margin on popup.
+
 _1.0.1_
 - Use v1.1 API.
 

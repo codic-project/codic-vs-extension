@@ -184,7 +184,7 @@
 
     </Window.Resources>
 
-    <Border Margin="2,2,5,5" Style="{StaticResource DialogBorder}">
+    <Border Margin="1" Style="{StaticResource DialogBorder}">
         <Grid >
             <!--
         <Grid.Effect>
