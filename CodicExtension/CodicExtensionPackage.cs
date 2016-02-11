@@ -23,20 +23,13 @@ namespace CodicExtension
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(Guids.CodicExtensionPackageGuid)]
     [ProvideAutoLoad(UIContextGuids80.CodeWindow)]
-    [ProvideAutoLoad("f1536ef8-92ec-443c-9ed7-fdadf150da82")]
+    [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
     public sealed class CodicExtensionPackage : Microsoft.VisualStudio.Shell.Package
     {
-        private IVsStatusbar _vsStatusbar;
-
         /// <summary>
         /// This read-only property returns the package instance
         /// </summary>
         internal static CodicExtensionPackage Instance { get; private set; }
-
-        private IVsStatusbar StatusBar
-        {
-            get { return _vsStatusbar ?? (_vsStatusbar = GetService(typeof(SVsStatusbar)) as IVsStatusbar); }
-        }
 
         protected override void Initialize()
         {
@@ -120,7 +113,6 @@ namespace CodicExtension
         /// </summary>
         private void GenerateMenu_Clicked(object sender, EventArgs e)
         {
-            ClearStatusBar();
             var props = Properties.Settings.Default;
             IWpfTextView view = GetActiveTextView();
             
@@ -168,10 +160,6 @@ namespace CodicExtension
                 };
                 dialog.ShowModeless(letterCase);
             }
-            else
-            {
-                NotifyNothingToTranslate();
-            }
         }
 
         private void SetDialogPosition(IWpfTextView _view, QuickLookDialog dialog)
@@ -192,22 +180,6 @@ namespace CodicExtension
 
             dialog.Left = newLeft;
             dialog.Top = newTop;
-        }
-
-        private void ClearStatusBar()
-        {
-            StatusBar.FreezeOutput(0);
-            StatusBar.Clear();
-        }
-
-        private void NotifyNothingToTranslate()
-        {
-            int frozen;
-            StatusBar.IsFrozen(out frozen);
-            if (frozen == 0)
-            {
-                StatusBar.SetText("Nothing to translate.");
-            }
         }
     }
 }

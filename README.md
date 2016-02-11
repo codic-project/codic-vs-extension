@@ -18,6 +18,9 @@ Visual Studio IDE向けのcodic拡張です。
 
 ### Change log
 
+_1.0.3_
+- Fix bug #1 (Support VS 2013).
+
 _1.0.2_
 - Fix bug #2 (NullReferenceException).
 - Remove extra margin on popup.

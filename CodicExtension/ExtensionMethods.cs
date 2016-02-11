@@ -51,12 +51,12 @@ namespace CodicExtension
         }
     }
 
-    internal static class VsShellExtensions
-    {
-        internal static bool IsPackageInstalled(this IVsShell vsShell, Guid packageId)
-        {
-            int isInstalled;
-            return ErrorHandler.Succeeded(vsShell.IsPackageInstalled(ref packageId, out isInstalled)) && 1 == isInstalled;
-        }
-    }
+    //internal static class VsShellExtensions
+    //{
+    //    internal static bool IsPackageInstalled(this IVsShell vsShell, Guid packageId)
+    //    {
+    //        int isInstalled;
+    //        return ErrorHandler.Succeeded(vsShell.IsPackageInstalled(ref packageId, out isInstalled)) && 1 == isInstalled;
+    //    }
+    //}
 }

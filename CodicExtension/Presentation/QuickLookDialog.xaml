@@ -4,8 +4,8 @@
                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                          xmlns:presentation="clr-namespace:CodicExtension.Presentation"
-                         xmlns:platformUi="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.10.0"
-                         xmlns:shell="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.10.0"
+                         xmlns:platformUi="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.12.0"
+                         xmlns:shell="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.12.0"
                          xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" 
     
                          mc:Ignorable="d" x:Name="EditTranslationDialogWindow"                 
@@ -200,7 +200,7 @@
 
                 
                 <Border Style="{StaticResource ToolbarBackground}">
-            
+
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -208,18 +208,15 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBox Grid.Row="0" Grid.Column="0" x:Name="SearchField" 
-        					TextWrapping="NoWrap" AcceptsReturn="False" Margin="3" MinWidth="100"  
+        					TextWrapping="NoWrap" AcceptsReturn="False" Margin="3,2,0,0" MinWidth="100"  
                                  Style="{StaticResource SearchTextBox}"
                                  Width="Auto" />
 
-                        <ComboBox Grid.Row="0" Grid.Column="1" Margin="3" BorderBrush="Transparent" x:Name="LetterCaseCombo" VerticalAlignment="Top" Width="50"
+                        <ComboBox Grid.Row="0" Grid.Column="1" Margin="0,2,3,0" BorderBrush="Transparent" x:Name="LetterCaseCombo" VerticalAlignment="Top" Width="50"
                           Style="{StaticResource ComboBoxFlatStyle}" />
-                        
-                    </Grid>
-                        
-                        
-                </Border>
 
+                    </Grid>
+                </Border>
 
                 <ListView Grid.Row="1" Grid.ColumnSpan="2" x:Name="CandidateList" Style="{StaticResource ResultView}" />
                 <TextBlock x:Name="StatusLabel" Grid.Row="1" Grid.ColumnSpan="2" Visibility="Hidden" TextWrapping="Wrap" Style="{StaticResource StatusText}" />

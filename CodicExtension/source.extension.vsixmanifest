@@ -12,7 +12,7 @@
     <Tags>translator, translate, localize, naming, english</Tags>
   </Metadata>
   <Installation>
-    <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[14.0,15.0)" />
+    <InstallationTarget Version="[11.0,15.0)" Id="Microsoft.VisualStudio.Community" />
     <InstallationTarget Version="[11.0,15.0)" Id="Microsoft.VisualStudio.Pro" />
     <InstallationTarget Version="[11.0,15.0)" Id="Microsoft.VisualStudio.Enterprise" />
   </Installation>
