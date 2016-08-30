@@ -10,7 +10,7 @@ using Microsoft.VisualStudio.TextManager.Interop;
 using CodicExtension.Presentation;
 using CodicExtension.Settings;
 using System.Windows;
-using System.Diagnostics;
+using System.Windows.Threading;
 using System.IO;
 using CodicExtension.Model;
 
@@ -31,11 +31,14 @@ namespace CodicExtension
         /// </summary>
         internal static CodicExtensionPackage Instance { get; private set; }
 
+        private static Dispatcher _dispatcher;
+
         protected override void Initialize()
         {
             base.Initialize();
 
             Instance = this;
+            _dispatcher = Dispatcher.CurrentDispatcher;
 
             var mcs = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
             if (null != mcs)
@@ -133,21 +136,24 @@ namespace CodicExtension
                 // Get selection in view.
                 SnapshotSpan span = view.Selection.SelectedSpans[0];
                 var selectedText = span.GetText();
-                if (string.IsNullOrEmpty(selectedText))
-                {
-                    ITextSnapshotLine line = span.Start.GetContainingLine();
-                    selectedText = span.Start.GetContainingLine().GetText();
-                    view.Selection.Select(new SnapshotSpan(line.Start, line.End), false);
-                }
+                //if (string.IsNullOrEmpty(selectedText))
+                //{
+                //ITextSnapshotLine line = span.Start.GetContainingLine();
+                //selectedText = span.Start.GetContainingLine().GetText();
+                //view.Selection.Select(new SnapshotSpan(line.Start, line.End), false);
+                //}
 
                 ITrackingSpan trackingSpan = span.Snapshot.CreateTrackingSpan(span, SpanTrackingMode.EdgeExclusive);
                 QuickLookDialog dialog = new QuickLookDialog();
                 SetDialogPosition(view, dialog);
                 dialog.SetText(selectedText);
                 dialog.Selected += (sender2, args) => {
-                    var buffer = trackingSpan.TextBuffer;
-                    Span sp = trackingSpan.GetSpan(buffer.CurrentSnapshot);
-                    buffer.Replace(sp, (string)args.Selection);
+                    _dispatcher.BeginInvoke(new Action(() => {
+                        var buffer = trackingSpan.TextBuffer;
+                        Span sp = trackingSpan.GetSpan(buffer.CurrentSnapshot);
+                        buffer.Replace(sp, (string)args.Selection);
+                    }));
+                    
                 };
                 dialog.LetterCaseChanged += (sender2, args) => {
                     if (props.LetterCaseConvention.ContainsKey(fileType))

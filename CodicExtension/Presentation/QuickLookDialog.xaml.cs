@@ -353,7 +353,7 @@ namespace CodicExtension.Presentation
             }
 
             CandidateList.Items.Clear();
-            if (result.Translations[0].Words.Count == 1)
+            if (result.Translations[0].Words.Count == 1 && result.Translations[0].Words[0].Successful)
             {
                 foreach (string text_ in result.Translations[0].Words[0].Candidates)
                 {

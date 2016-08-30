@@ -67,6 +67,7 @@ namespace CodicExtension.Model
                     {
                         candidates.Add(candidateToken["text_in_casing"].ToString());
                     }
+                    word.Successful = wordToken["successful"].ToObject<bool>();
                     word.Candidates = candidates;
                     words.Add(word);
                 }
