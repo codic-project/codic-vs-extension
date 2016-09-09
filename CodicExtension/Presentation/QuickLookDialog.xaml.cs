@@ -77,7 +77,6 @@ namespace CodicExtension.Presentation
             MouseHookStruct myMouseHookStruct = (MouseHookStruct)Marshal.PtrToStructure(lParam, typeof(MouseHookStruct));
 
             var handled = false;
-            //Debug.WriteLine("#" + ((MouseMessages)wParam));
             if (nCode >= 0)
             {
                 if (!resizing && (MouseMessages.WM_NCLBUTTONUP == (MouseMessages)wParam ||
@@ -204,10 +203,8 @@ namespace CodicExtension.Presentation
                         mouseHookProcedure,
                         (IntPtr)0,
                         AppDomain.GetCurrentThreadId());
-            //If the SetWindowsHookEx function fails.
             if (hHook == 0)
             {
-                //MessageBox.Show("SetWindowsHookEx Failed");
                 return;
             }
 
