@@ -18,10 +18,13 @@ Visual Studio IDE向けのcodic拡張です。
 
 ### Change log
 
+_1.0.5_
+- Fix bugs #3, #4 (一部の環境で正常に動作しない問題)
+
 _1.0.4_
 - Fix bug #6.
 - Fix bug #5.
-- Workaround for bug #4 (use Dispatcher).
+- Workaround for bug #4.
 
 _1.0.2_
 - Fix bug #2 (NullReferenceException).
