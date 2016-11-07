@@ -210,7 +210,8 @@ namespace CodicExtension.Presentation
 
             Deactivated += (sender, args) =>
             {
-                Close();
+                // Cannot call 'Close()' directly from window event handler.
+                Dispatcher.BeginInvoke((Action)(() => Close()));
             };
 
             // Handing of ESC key.
