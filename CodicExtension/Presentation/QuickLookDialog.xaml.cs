@@ -21,12 +21,12 @@ namespace CodicExtension.Presentation
         public event EventHandler<SelectedEventArgs<String>> Selected;
         public event EventHandler<SelectedEventArgs<LetterCase>> LetterCaseChanged;
 
-        private HwndSource _hwndSource;
+        //private HwndSource _hwndSource;
         private Point offset;
         private bool resizing = false;
         
-        private HookProc mouseHookProcedure;
-        private int hHook = 0;
+        //private HookProc mouseHookProcedure;
+        //private int hHook = 0;
 
 
         public QuickLookDialog()
@@ -38,10 +38,10 @@ namespace CodicExtension.Presentation
                 SearchField.Focus();
             };
 
-            Closed += (sender, obj) =>
-            {
-                Release();
-            };
+            //Closed += (sender, obj) =>
+            //{
+            //    Release();
+            //};
 
             // Initialize cancel (Emulate the MODELESS dialog)
             InitializeCancel();
@@ -72,53 +72,53 @@ namespace CodicExtension.Presentation
 
         }
 
-        public int MouseHookProc(int nCode, IntPtr wParam, IntPtr lParam)
-        {
-            MouseHookStruct myMouseHookStruct = (MouseHookStruct)Marshal.PtrToStructure(lParam, typeof(MouseHookStruct));
+        //public int MouseHookProc(int nCode, IntPtr wParam, IntPtr lParam)
+        //{
+        //    MouseHookStruct myMouseHookStruct = (MouseHookStruct)Marshal.PtrToStructure(lParam, typeof(MouseHookStruct));
 
-            var handled = false;
-            if (nCode >= 0)
-            {
-                if (!resizing && (MouseMessages.WM_NCLBUTTONUP == (MouseMessages)wParam ||
-                   MouseMessages.WM_NCLBUTTONDOWN == (MouseMessages)wParam))
-                {
-                    this.Close();
-                    handled = true;
-                }
-                else if (resizing && (MouseMessages.WM_NCLBUTTONUP == (MouseMessages)wParam ||
-                    MouseMessages.WM_LBUTTONUP == (MouseMessages)wParam))
-                {
+        //    var handled = false;
+        //    if (nCode >= 0)
+        //    {
+        //        if (!resizing && (MouseMessages.WM_NCLBUTTONUP == (MouseMessages)wParam ||
+        //           MouseMessages.WM_NCLBUTTONDOWN == (MouseMessages)wParam))
+        //        {
+        //            this.Close();
+        //            handled = true;
+        //        }
+        //        else if (resizing && (MouseMessages.WM_NCLBUTTONUP == (MouseMessages)wParam ||
+        //            MouseMessages.WM_LBUTTONUP == (MouseMessages)wParam))
+        //        {
                     
-                    if (resizing)
-                    {
-                        Properties.Settings.Default.DialogWidth = this.Width;
-                        Properties.Settings.Default.DialogHeight = this.Height;
-                    }
-                    resizing = false;
+        //            if (resizing)
+        //            {
+        //                Properties.Settings.Default.DialogWidth = this.Width;
+        //                Properties.Settings.Default.DialogHeight = this.Height;
+        //            }
+        //            resizing = false;
                     
-                }
-                else if ((MouseMessages.WM_MOUSEMOVE == (MouseMessages)wParam ||
-                    MouseMessages.WM_NCMOUSEMOVE == (MouseMessages)wParam))
-                {
-                    if (resizing)
-                    {
-                        POINT p = myMouseHookStruct.pt;
-                        Debug.WriteLine(p.x + "," + p.y);
-                        this.Width = Math.Max(p.x + offset.X - this.Left, 100);
-                        this.Height = Math.Max(p.y + offset.Y - this.Top, 100);
-                    }
-                }
-            }
+        //        }
+        //        else if ((MouseMessages.WM_MOUSEMOVE == (MouseMessages)wParam ||
+        //            MouseMessages.WM_NCMOUSEMOVE == (MouseMessages)wParam))
+        //        {
+        //            if (resizing)
+        //            {
+        //                POINT p = myMouseHookStruct.pt;
+        //                Debug.WriteLine(p.x + "," + p.y);
+        //                this.Width = Math.Max(p.x + offset.X - this.Left, 100);
+        //                this.Height = Math.Max(p.y + offset.Y - this.Top, 100);
+        //            }
+        //        }
+        //    }
 
-            if (handled)
-            {
-                return 1;
-            }
-            else
-            {
-                return NativeMethods.CallNextHookEx(hHook, nCode, wParam, lParam);
-            }
-        }
+        //    if (handled)
+        //    {
+        //        return 1;
+        //    }
+        //    else
+        //    {
+        //        return NativeMethods.CallNextHookEx(hHook, nCode, wParam, lParam);
+        //    }
+        //}
 
         private void InitializeSearchBox()
         {
@@ -185,11 +185,11 @@ namespace CodicExtension.Presentation
             base.ShowDialog();
         }
 
-        protected override void OnInitialized(EventArgs e)
-        {
-            SourceInitialized += OnSourceInitialized;
-            base.OnInitialized(e);
-        }
+        //protected override void OnInitialized(EventArgs e)
+        //{
+        //    SourceInitialized += OnSourceInitialized;
+        //    base.OnInitialized(e);
+        //}
 
         /// <summary>
         /// Initialzie canceling.
@@ -198,15 +198,15 @@ namespace CodicExtension.Presentation
         private void InitializeCancel()
         {
             // Create an instance of HookProc.
-            mouseHookProcedure = new HookProc(MouseHookProc);
-            hHook = NativeMethods.SetWindowsHookEx(WindowHandleConstans.WH_MOUSE,
-                        mouseHookProcedure,
-                        (IntPtr)0,
-                        AppDomain.GetCurrentThreadId());
-            if (hHook == 0)
-            {
-                return;
-            }
+            //mouseHookProcedure = new HookProc(MouseHookProc);
+            //hHook = NativeMethods.SetWindowsHookEx(WindowHandleConstans.WH_MOUSE,
+            //            mouseHookProcedure,
+            //            (IntPtr)0,
+            //            AppDomain.GetCurrentThreadId());
+            //if (hHook == 0)
+            //{
+            //    return;
+            //}
 
             Deactivated += (sender, args) =>
             {
@@ -287,15 +287,15 @@ namespace CodicExtension.Presentation
             }
         }
 
-        private void WindowResize(object sender, MouseButtonEventArgs e) //PreviewMousLeftButtonDown
-        {
-            NativeMethods.SendMessage(_hwndSource.Handle, 0x112, (IntPtr)61448, IntPtr.Zero);
-        }
+        //private void WindowResize(object sender, MouseButtonEventArgs e) //PreviewMousLeftButtonDown
+        //{
+        //    NativeMethods.SendMessage(_hwndSource.Handle, 0x112, (IntPtr)61448, IntPtr.Zero);
+        //}
 
-        private void OnSourceInitialized(object sender, EventArgs e)
-        {
-            _hwndSource = (HwndSource)PresentationSource.FromVisual(this);
-        }
+        //private void OnSourceInitialized(object sender, EventArgs e)
+        //{
+        //    _hwndSource = (HwndSource)PresentationSource.FromVisual(this);
+        //}
 
         public void SetText(String text)
         {
@@ -362,12 +362,12 @@ namespace CodicExtension.Presentation
             }
         }
 
-        private void Release()
-        {
-            if (hHook != 0)
-                NativeMethods.UnhookWindowsHookEx(hHook);
-            hHook = 0;
-        }
+        //private void Release()
+        //{
+        //    if (hHook != 0)
+        //        NativeMethods.UnhookWindowsHookEx(hHook);
+        //    hHook = 0;
+        //}
 
         protected virtual void OnSelected(SelectedEventArgs<string> e)
         {
