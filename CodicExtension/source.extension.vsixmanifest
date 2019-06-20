@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="7123CD01-7097-408E-970E-9B723B4D6A8B" Version="1.0.8" Language="ja-JP" Publisher="Codic Project Team" />
+        <Identity Id="7123CD01-7097-408E-970E-9B723B4D6A8B" Version="1.0.7" Language="ja-JP" Publisher="Codic Project Team" />
         <DisplayName>Codic Extension</DisplayName>
         <Description xml:space="preserve">Codic Extension for Visual Studio</Description>
         <MoreInfo>https://github.com/codic-project/codic-vs-extension</MoreInfo>
@@ -24,6 +24,6 @@
         <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%|" />
     </Assets>
     <Prerequisites>
-        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[15.0.26208.0,16.0)" DisplayName="Visual Studio のコア エディター" />
+        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[16.1.28811.260,)" DisplayName="Visual Studio のコア エディター" />
     </Prerequisites>
 </PackageManifest>
