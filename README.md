@@ -18,6 +18,9 @@ Visual Studio IDE向けのcodic拡張です。
 
 ### Change log
 
+_1.0.7_
+- Visual Studio 2019をサポート
+
 _1.0.6_
 - Visual Studio 2017をサポート
 
