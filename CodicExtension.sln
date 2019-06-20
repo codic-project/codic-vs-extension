@@ -7,10 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodicExtension", "CodicExte
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug 2012|Any CPU = Debug 2012|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{361CC716-811B-414B-BC78-3074212CDAB2}.Debug 2012|Any CPU.ActiveCfg = Debug 2012|Any CPU
+		{361CC716-811B-414B-BC78-3074212CDAB2}.Debug 2012|Any CPU.Build.0 = Debug 2012|Any CPU
 		{361CC716-811B-414B-BC78-3074212CDAB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{361CC716-811B-414B-BC78-3074212CDAB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{361CC716-811B-414B-BC78-3074212CDAB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
