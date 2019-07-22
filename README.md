@@ -18,6 +18,11 @@ Visual Studio IDE向けのcodic拡張です。
 
 ### Change log
 
+_1.0.8_
+- バグ修正
+- キーボードバインディングに Ctrl+Alt+D を追加
+- Fix bugs #14, #13
+
 _1.0.7_
 - Visual Studio 2019をサポート
 
