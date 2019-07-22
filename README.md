@@ -10,7 +10,7 @@ Visual Studio IDE向けのcodic拡張です。
 
 ### How to use
 
-エディタ上で、<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd> でネーミング生成するためのポップアップを開きます。テキストを選択状態で開くと、ダイレクト生成できます。
+エディタ上で、<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd> (または <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>D</kbd>) でネーミング生成するためのポップアップを開きます。テキストを選択状態で開くと、ダイレクト生成できます。
 
 ![codic plugin](https://raw.githubusercontent.com/codic-project/codic-vs-extension/master/CodicExtension/Resources/Screenshot.png)
 
