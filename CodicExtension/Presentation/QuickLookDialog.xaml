@@ -28,7 +28,7 @@
 
         <Style x:Key="SearchTextBox" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
             <Setter Property="Foreground" Value="{DynamicResource {x:Static shell:VsBrushes.ToolWindowTextKey}}"/>
-            <Setter Property="Background" Value="Transparent"  />
+            <Setter Property="Background" Value="{DynamicResource {x:Static shell:VsBrushes.CommandBarGradientBeginKey}}"  />
             <Setter Property="BorderThickness" Value="0"  />
         </Style>
 

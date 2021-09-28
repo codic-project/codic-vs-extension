@@ -51,7 +51,7 @@ namespace CodicExtension
 
         [DllImport("user32.dll", CharSet = CharSet.Auto,
  CallingConvention = CallingConvention.StdCall)]
-        public static extern int SetWindowsHookEx(int idHook, HookProc lpfn, IntPtr hInstance, int threadId);
+        public static extern int SetWindowsHookEx(int idHook, HookProc lpfn, IntPtr hInstance, IntPtr threadId);
 
         [DllImport("user32.dll", CharSet = CharSet.Auto,
          CallingConvention = CallingConvention.StdCall)]
@@ -60,5 +60,7 @@ namespace CodicExtension
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         public static extern int CallNextHookEx(int idHook, int nCode, IntPtr wParam, IntPtr lParam);
 
+        [DllImport("kernel32.dll")]
+        public static extern IntPtr GetCurrentThreadId();
     }
 }

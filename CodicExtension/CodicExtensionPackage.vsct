@@ -121,6 +121,7 @@
     <CommandPlacement guid="guidCodicCmdSetGuid" id="MyMenuGroup" priority="0x0600">
       <Parent guid="GuidVisualStudioCSSDocumentContextMenu" id="IDVisualStudioCSSDocumentContextMenu" />
     </CommandPlacement>
+    
     <CommandPlacement guid="guidCodicCmdSetGuid" id="MyMenuGroup" priority="0x0600">
       <Parent guid="jsEditorCommandSet" id="jsContextMenu" />
     </CommandPlacement>
@@ -129,6 +130,8 @@
   <KeyBindings>
     <KeyBinding guid="guidCodicCmdSetGuid" id="GenerationCmdId" key1="D" mod1="CONTROL SHIFT" editor="guidVSStd97" />
     <KeyBinding guid="guidCodicCmdSetGuid" id="GenerationCmdId" key1="D" mod1="CONTROL SHIFT" editor="GUID_TextEditorFactory" />
+    <KeyBinding guid="guidCodicCmdSetGuid" id="GenerationCmdId" key1="D" mod1="CONTROL ALT" editor="guidVSStd97" />
+    <KeyBinding guid="guidCodicCmdSetGuid" id="GenerationCmdId" key1="D" mod1="CONTROL ALT" editor="GUID_TextEditorFactory" />
   </KeyBindings>
 
   <Symbols>

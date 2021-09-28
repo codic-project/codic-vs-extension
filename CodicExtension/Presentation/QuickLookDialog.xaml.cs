@@ -202,7 +202,7 @@ namespace CodicExtension.Presentation
             hHook = NativeMethods.SetWindowsHookEx(WindowHandleConstans.WH_MOUSE,
                         mouseHookProcedure,
                         (IntPtr)0,
-                        AppDomain.GetCurrentThreadId());
+                        NativeMethods.GetCurrentThreadId());
             if (hHook == 0)
             {
                 return;
