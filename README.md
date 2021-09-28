@@ -22,7 +22,7 @@ Visual Studio IDE向けのcodic拡張です。
 _1.0.9_
 - Fix bugs [#15](https://github.com/codic-project/codic-vs-extension/issues/15) (カーソルが見にくい問題）
 
-- _1.0.8_
+_1.0.8_
 - バグ修正
 - キーボードバインディングに Ctrl+Alt+D を追加
 - Fix bugs #14, #13
