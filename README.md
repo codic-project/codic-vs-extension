@@ -5,8 +5,8 @@ Visual Studio IDE向けのcodic拡張です。
 ### Install
 1. Visual Studio GalleryよりVSIXをダウンロードし、実行します。
 
-- Visual Studio 2022
-- [Visual Studio 2012~2019](https://marketplace.visualstudio.com/items?itemName=namba0219.CodicExtension)
+    Visual Studio 2022
+    [Visual Studio 2012~2019](https://marketplace.visualstudio.com/items?itemName=namba0219.CodicExtension)
 
 2. Visual Studioをリスタート後、メニューの Tools > Options からオプションダイアログを開き、Codic Extensionページより、アクセストークンを設定します。アクセストークンは、
  [Codic](https://codic.jp)にログイン後、APIステータスのページより取得できます。
