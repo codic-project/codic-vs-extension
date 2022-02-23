@@ -3,7 +3,9 @@ Visual Studio IDE向けのcodic拡張です。
 
 
 ### Install
-1. [Visual Studio Gallery](https://visualstudiogallery.msdn.microsoft.com/b24a6e62-c6af-4cc2-aa5b-c2ae39195d7f?SRC=Home)よりVSIXをダウンロードし、実行します。
+1. Visual Studio GalleryよりVSIXをダウンロードし、実行します。
+- Visual Studio 2012~2019
+- [Visual Studio 2022](https://marketplace.visualstudio.com/items?itemName=namba0219.CodicExtension)
 
 2. Visual Studioをリスタート後、メニューの Tools > Options からオプションダイアログを開き、Codic Extensionページより、アクセストークンを設定します。アクセストークンは、
  [Codic](https://codic.jp)にログイン後、APIステータスのページより取得できます。
@@ -18,6 +20,9 @@ Visual Studio IDE向けのcodic拡張です。
 
 ### Change log
 
+_1.0.10_
+- Visual Studio 2019をサポート
+- 2022以降の拡張を分離
 
 _1.0.9_
 - Fix bugs [#15](https://github.com/codic-project/codic-vs-extension/issues/15) (カーソルが見にくい問題）
