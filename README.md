@@ -3,14 +3,14 @@ Visual Studio IDE向けのcodic拡張です。
 
 
 ### Install
-1. [Visual Studio Gallery](https://visualstudiogallery.msdn.microsoft.com/b24a6e62-c6af-4cc2-aa5b-c2ae39195d7f?SRC=Home)よりVSIXをダウンロードし、実行します。
+1. [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=namba0219.CodicExtension)よりVSIXをダウンロードし、実行します。
 
 2. Visual Studioをリスタート後、メニューの Tools > Options からオプションダイアログを開き、Codic Extensionページより、アクセストークンを設定します。アクセストークンは、
  [Codic](https://codic.jp)にログイン後、APIステータスのページより取得できます。
 
 ### How to use
 
-エディタ上で、<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd> (または <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>D</kbd>) でネーミング生成するためのポップアップを開きます。テキストを選択状態で開くと、ダイレクト生成できます。
+エディタ上で、右クリックメニューあるいは<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd> (または <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>D</kbd>) でネーミング生成するためのポップアップを開きます。テキストを選択状態で開くと、ダイレクト生成できます。
 
 ![codic plugin](https://raw.githubusercontent.com/codic-project/codic-vs-extension/master/CodicExtension/Resources/Screenshot.png)
 
@@ -18,6 +18,10 @@ Visual Studio IDE向けのcodic拡張です。
 
 ### Change log
 
+_2.0.0_
+- 非同期ローディングに対応
+- Visual Studio 2022をサポート [#16](https://github.com/codic-project/codic-vs-extension/issues/16) (
+- スタイル調整
 
 _1.0.9_
 - Fix bugs [#15](https://github.com/codic-project/codic-vs-extension/issues/15) (カーソルが見にくい問題）

@@ -13,18 +13,26 @@ using System.Windows;
 using System.Windows.Threading;
 using System.IO;
 using CodicExtension.Model;
+using System.Threading.Tasks;
+using System.Threading;
+using Microsoft.VisualStudio;
 
 namespace CodicExtension
 {
-    [PackageRegistration(UseManagedResourcesOnly = true)]
+    [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
     [ProvideOptionPage(typeof(OptionsPage), "CodicExtension", "Options", 110, 111, true)]
     [ProvideProfile(typeof(OptionsPage), "CodicExtension", "Options", 110, 111, true, DescriptionResourceID = 110)]
 
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(Guids.CodicExtensionPackageGuid)]
-    [ProvideAutoLoad(UIContextGuids80.CodeWindow)]
-    [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
-    public sealed class CodicExtensionPackage : Microsoft.VisualStudio.Shell.Package
+    [ProvideService(typeof(CodicExtensionPackage), IsAsyncQueryable = true)]
+    //https://github.com/microsoft/VSSDK-Extensibility-Samples/tree/master/AsyncPackageMigration
+    //https://docs.microsoft.com/en-us/visualstudio/extensibility/how-to-use-asyncpackage-to-load-vspackages-in-the-background?view=vs-2019
+    [ProvideAutoLoad(VSConstants.UICONTEXT.SolutionExistsAndFullyLoaded_string, PackageAutoLoadFlags.BackgroundLoad)]
+
+    //[ProvideAutoLoad(UIContextGuids80.CodeWindow)]
+    //[ProvideAutoLoad(UIContextGuids80.SolutionExists)]
+    public sealed class CodicExtensionPackage : AsyncPackage
     {
         /// <summary>
         /// This read-only property returns the package instance
@@ -33,22 +41,25 @@ namespace CodicExtension
 
         private static Dispatcher _dispatcher;
 
-        protected override void Initialize()
+        protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
-            base.Initialize();
-
             Instance = this;
             _dispatcher = Dispatcher.CurrentDispatcher;
 
-            var mcs = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
-            if (null != mcs)
+            //await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+            await ThreadHelper.JoinableTaskFactory.RunAsync(async delegate
             {
-                // Create the command for the menu item.
-                var generateCommandId = new CommandID(Guids.guidTranslatorCmdSet, (int)Guids.GenerationCmdId);
-                var menuItemTranslate = new OleMenuCommand(GenerateMenu_Clicked, generateCommandId);
-                menuItemTranslate.BeforeQueryStatus += MenuItemTranslateOnBeforeQueryStatus;
-                mcs.AddCommand(menuItemTranslate);
-            }
+                await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+                var mcs = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
+                if (null != mcs)
+                {
+                    // Create the command for the menu item.
+                    var generateCommandId = new CommandID(Guids.guidTranslatorCmdSet, (int)Guids.GenerationCmdId);
+                    var menuItemTranslate = new OleMenuCommand(GenerateMenu_Clicked, generateCommandId);
+                    menuItemTranslate.BeforeQueryStatus += MenuItemTranslateOnBeforeQueryStatus;
+                    mcs.AddCommand(menuItemTranslate);
+                }
+            });
         }
 
         private void MenuItemTranslateOnBeforeQueryStatus(object sender, EventArgs eventArgs)
@@ -57,7 +68,8 @@ namespace CodicExtension
             if (oleMenuCommand != null)
             {
                 oleMenuCommand.Enabled = true;
-                oleMenuCommand.Text = "Generate Naming";
+                //oleMenuCommand.Text = "Generate Naming";
+                oleMenuCommand.Text = "codic: ネーミングを生成";
                 var view = GetActiveTextView();
                 if (view != null)
                 {
@@ -65,7 +77,8 @@ namespace CodicExtension
                     {
                         var span = view.Selection.SelectedSpans[0];
                         var selectedText = span.GetText();
-                        oleMenuCommand.Text = string.Format("Generate Naming for '{0}'", selectedText.Truncate(26));
+                        //oleMenuCommand.Text = string.Format("Generate Naming for '{0}'", selectedText.Truncate(26));
+                        oleMenuCommand.Text = string.Format("codic: '{0}'のネーミングを生成", selectedText.Truncate(26));
                     }
                 } else
                 {
@@ -116,6 +129,7 @@ namespace CodicExtension
         /// </summary>
         private void GenerateMenu_Clicked(object sender, EventArgs e)
         {
+            Console.WriteLine("#GenerateMenu_Clicked");
             var props = Properties.Settings.Default;
             IWpfTextView view = GetActiveTextView();
             
@@ -145,15 +159,22 @@ namespace CodicExtension
 
                 ITrackingSpan trackingSpan = span.Snapshot.CreateTrackingSpan(span, SpanTrackingMode.EdgeExclusive);
                 QuickLookDialog dialog = new QuickLookDialog();
+                Console.WriteLine("#GenerateMenu_Clicked > SetDialogPosition");
                 SetDialogPosition(view, dialog);
                 dialog.SetText(selectedText);
                 dialog.Selected += (sender2, args) => {
-                    _dispatcher.BeginInvoke(new Action(() => {
+                    ThreadHelper.JoinableTaskFactory.Run(async delegate {
+                        await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
                         var buffer = trackingSpan.TextBuffer;
                         Span sp = trackingSpan.GetSpan(buffer.CurrentSnapshot);
                         buffer.Replace(sp, (string)args.Selection);
-                    }));
-                    
+                    });
+                    //_dispatcher.Invoke(new Action(() => {
+                    //    var buffer = trackingSpan.TextBuffer;
+                    //Span sp = trackingSpan.GetSpan(buffer.CurrentSnapshot);
+                    //buffer.Replace(sp, (string)args.Selection);
+                    //}));
+
                 };
                 dialog.LetterCaseChanged += (sender2, args) => {
                     if (props.LetterCaseConvention.ContainsKey(fileType))
@@ -164,6 +185,7 @@ namespace CodicExtension
                         props.Save();
                     }
                 };
+                Console.WriteLine("#GenerateMenu_Clicked > dialog.ShowModeless");
                 dialog.ShowModeless(letterCase);
             }
         }

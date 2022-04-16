@@ -63,7 +63,7 @@
         <CommandFlag>TextChanges</CommandFlag>
         <Strings>
           <CommandName>GenerationCmdId</CommandName>
-          <ButtonText>TranslateSelection</ButtonText>
+          <ButtonText></ButtonText>
         </Strings>
       </Button>
     </Buttons>

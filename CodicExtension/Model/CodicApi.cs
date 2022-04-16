@@ -18,11 +18,11 @@ namespace CodicExtension.Model
         }
 
 
-        public async Task<List<Project>> GetUserProjectsAync(string accessToken)
+        public async Task<List<Project>> GetUserProjectsAsync(string accessToken)
         {
             var data = Utils.BuildQuerystring(new Dictionary<string, string>());
 
-            JArray json = await PostJsonArray(accessToken,
+            JArray json = await PostJsonArrayAsync(accessToken,
                 "https://api.codic.jp/v1/user_projects.json", data);
             
             List<Project> projects = new List<Project>();
@@ -50,7 +50,7 @@ namespace CodicExtension.Model
                 { "casing", letterCase}
             });
 
-            JArray json = await PostJsonArray(accessToken,
+            JArray json = await PostJsonArrayAsync(accessToken,
     "https://api.codic.jp/v1.1/engine/translate.json", data);
 
             TranslationResult result = new TranslationResult();
@@ -79,9 +79,10 @@ namespace CodicExtension.Model
             return result;
         }
 
-        private async Task<JArray> PostJsonArray(string accessToken, string url, string data)
+        private async Task<JArray> PostJsonArrayAsync(string accessToken, string url, string data)
         {
             var client = new ConfigurableClient();
+            client.Proxy = null;
             client.Timeout = 1000;
             client.Headers.Add("User-Agent", "Codic VS Extension/1.0");
             client.Headers.Add("Pragma", "no-cache");
@@ -101,7 +102,7 @@ namespace CodicExtension.Model
                 string responseText = null;
                 using (var reader = new StreamReader(responseStream))
                 {
-                    responseText = reader.ReadToEnd();
+                    responseText = await reader.ReadToEndAsync();
                 }
                 JObject json = JObject.Parse(responseText);
                 JToken error = json["errors"].Children().First();

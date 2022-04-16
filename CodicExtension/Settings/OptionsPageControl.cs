@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using CodicExtension.Model;
 
@@ -39,14 +40,14 @@ namespace CodicExtension.Settings
             }
         }
 
-        private void InitView(OptionsPage optionPage)
+        private async void InitView(OptionsPage optionPage)
         {
             accessTokenField.Text = optionPage.AccessToken;
 
-            FillProjectsAync(optionPage.AccessToken, optionPage.ProjectId);
+            await FillProjectsAsync(optionPage.AccessToken, optionPage.ProjectId);
         }
 
-        private async void FillProjectsAync(String accessToken, String selectedId)
+        private async Task<Boolean> FillProjectsAsync(String accessToken, String selectedId)
         {
             statusLabel.Text = "";
             FillProjectsList(projectIdCombo, new List<Project>(), selectedId);
@@ -54,19 +55,21 @@ namespace CodicExtension.Settings
             if (accessToken == null || accessToken.Equals(""))
             {
                 // TODO : Show thick
-                return;
+                return false;
             }
 
             try
             {
                 var api = new CodicApi();
-                List<Project> projects = await api.GetUserProjectsAync(accessToken);
+                List<Project> projects = await api.GetUserProjectsAsync(accessToken);
                 FillProjectsList(projectIdCombo, projects, selectedId);
             }
             catch (ApiException e)
             {
                 statusLabel.Text = e.Message;
+                return false;
             }
+            return true;
         }
 
         private void FillProjectsList(ComboBox cb, List<Project> projects, string selectedCode)
@@ -89,7 +92,7 @@ namespace CodicExtension.Settings
 
         private void accessTokenField_TextChanged(object sender, EventArgs e)
         {
-            FillProjectsAync(this.accessTokenField.Text,
+            FillProjectsAsync(this.accessTokenField.Text,
                 (String)this.projectIdCombo.SelectedValue);
         }
     }

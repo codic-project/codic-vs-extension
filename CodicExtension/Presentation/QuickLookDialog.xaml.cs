@@ -1,10 +1,12 @@
 ﻿
 using CodicExtension.Model;
 using CodicExtension.Settings;
+using Microsoft.VisualStudio.Shell;
 using System;
 using System.Diagnostics;
 using System.Reactive.Linq;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -319,7 +321,7 @@ namespace CodicExtension.Presentation
 
         }
 
-        private async void UpdateListAsync(string text, LetterCase letterCase)
+        private async Task<Boolean> UpdateListAsync(string text, LetterCase letterCase)
         {
             SetStatusMessage(null);
 
@@ -328,13 +330,13 @@ namespace CodicExtension.Presentation
                 options.AccessToken.Equals(""))
             {
                 SetStatusMessage("オプションページよりアクセストークンを設定してください。");
-                return;
+                return false;
             }
 
             if (text == null || text.Equals(""))
             {
                 CandidateList.Items.Clear();
-                return;
+                return false;
             }
 
            
@@ -342,12 +344,14 @@ namespace CodicExtension.Presentation
             TranslationResult result = null;
             try
             {
+                Debug.Print("call api.TranslateAsync");
                 result = await api.TranslateAsync(options.AccessToken, options.ProjectId, text, letterCase.Id);
+                Debug.Print("return api.TranslateAsync");
             }
             catch (ApiException e)
             {
                 SetStatusMessage(e.Message + "");
-                return;
+                return false;
             }
 
             CandidateList.Items.Clear();
@@ -361,6 +365,7 @@ namespace CodicExtension.Presentation
             else {
                 CandidateList.Items.Add(result.Translations[0].TranslatedText);
             }
+            return true;
         }
 
         private void Release()
